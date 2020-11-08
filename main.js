@@ -4,6 +4,7 @@ const AdmZip = require('adm-zip')
 const filesize = require('filesize')
 const pathname = require('path')
 const fs = require("fs")
+const minimatch = require("minimatch")
 
 async function main() {
     try {
@@ -79,7 +80,7 @@ async function main() {
         // One artifact or all if `name` input is not specified.
         if (name) {
             artifacts = artifacts.data.artifacts.filter((artifact) => {
-                return artifact.name == name
+                return minimatch(artifact.name, name)
             })
         } else {
             artifacts = artifacts.data.artifacts
